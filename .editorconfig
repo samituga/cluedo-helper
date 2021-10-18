@@ -1,0 +1,11 @@
+root = true
+
+# Set default charset
+[*]
+charset = utf-8
+end_of_line = crlf
+
+# 4 space indentation
+[*.java]
+indent_style = tab
+indent_size = 4
