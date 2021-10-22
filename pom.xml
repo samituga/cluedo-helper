@@ -72,20 +72,20 @@
     <profiles>
         <!-- production profile -->
         <profile>
-            <id>prd</id>
+            <id>prod</id>
             <properties>
-                <activeProfiles>prd</activeProfiles>
+                <activeProfiles>prod</activeProfiles>
             </properties>
         </profile>
 
         <!-- default profile containing development dependencies -->
         <profile>
-            <id>dev</id>
+            <id>local</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <activeProfiles>default,dev</activeProfiles>
+                <activeProfiles>default,local</activeProfiles>
             </properties>
             <dependencies>
 
