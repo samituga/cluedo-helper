@@ -12,10 +12,9 @@ import java.util.Properties;
 
 /**
  * Enables the possibility to use YAML files with {@link PropertySource}
+ * by referencing this class in the factory attribute
  */
 public class YamlPropertySourceFactory implements PropertySourceFactory {
-
-	// TODO: 2021-10-20 Is this good enough? 
 
 	@Override
 	public PropertySource<?> createPropertySource(String name, EncodedResource encodedResource) {
