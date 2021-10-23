@@ -1,7 +1,27 @@
 package com.perso.cluedohelper.exception;
 
-import org.springframework.web.bind.annotation.ResponseStatus;
+import lombok.Getter;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
-public class BaseException extends RuntimeException {
+@Validated
+public abstract class BaseException extends RuntimeException {
+
+	public BaseException(String message) {
+		super(message);
+	}
+
+	public BaseException(String message, Throwable cause) {
+		super(message, cause);
+	}
+
+	public BaseException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+		super(message, cause, enableSuppression, writableStackTrace);
+	}
+
+	public abstract HttpStatus httpStatus();
+	public abstract String internalCode();
 }

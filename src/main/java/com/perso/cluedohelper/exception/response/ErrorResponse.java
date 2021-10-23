@@ -7,26 +7,30 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @JsonPropertyOrder({
-
+	"timestamp",
+	"trace_id",
+	"status_code",
+	"message",
+	"internal_code",
+	"sub_errors"
 })
 @Data
 @Builder
+@Validated
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = false)
-public class ExceptionResponseBody {
+public class ErrorResponse {
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
+	@JsonProperty("timestamp")
 	private LocalDateTime timestamp;
 
 	@NotBlank
 	@JsonProperty("trace_id")
 	private String traceId;
-
-	@NotBlank
-	@JsonProperty("status_code")
-	private Integer statusCode;
 
 	@NotBlank
 	@JsonProperty("message")
@@ -36,7 +40,6 @@ public class ExceptionResponseBody {
 	@JsonProperty("internal_code")
 	private String internalCode;
 
-
-
-
+	@JsonProperty("sub_errors")
+	List<SubErrorResponse> subErrors;
 }
