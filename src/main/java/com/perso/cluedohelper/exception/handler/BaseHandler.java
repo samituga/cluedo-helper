@@ -2,7 +2,6 @@ package com.perso.cluedohelper.exception.handler;
 
 import com.perso.cluedohelper.exception.BaseException;
 import com.perso.cluedohelper.exception.response.ErrorResponse;
-import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDateTime;
 

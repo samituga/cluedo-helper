@@ -1,11 +1,7 @@
 package com.perso.cluedohelper.exception;
 
-import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 @Validated
 public abstract class BaseException extends RuntimeException {
@@ -23,5 +19,6 @@ public abstract class BaseException extends RuntimeException {
 	}
 
 	public abstract HttpStatus httpStatus();
+
 	public abstract String internalCode();
 }

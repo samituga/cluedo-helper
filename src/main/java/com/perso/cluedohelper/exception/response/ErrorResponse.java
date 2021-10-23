@@ -24,22 +24,18 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = false)
 public class ErrorResponse {
 
+	@JsonProperty("sub_errors")
+	List<SubErrorResponse> subErrors;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	@JsonProperty("timestamp")
 	private LocalDateTime timestamp;
-
 	@NotBlank
 	@JsonProperty("trace_id")
 	private String traceId;
-
 	@NotBlank
 	@JsonProperty("message")
 	private String message;
-
 	@NotBlank
 	@JsonProperty("internal_code")
 	private String internalCode;
-
-	@JsonProperty("sub_errors")
-	List<SubErrorResponse> subErrors;
 }
