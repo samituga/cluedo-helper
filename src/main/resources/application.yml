@@ -1,6 +1,9 @@
 spring:
   profiles:
-    active: '@activeProfiles' # defined in pom.xnk
+    active: '@activeProfiles@'
 
 server:
   port: ${env.SERVER_PORT:8080}
+
+app:
+  version: '@revision@'
