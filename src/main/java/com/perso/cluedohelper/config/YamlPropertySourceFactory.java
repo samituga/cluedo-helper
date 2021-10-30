@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.Properties;
 
 /**
- * Enables the possibility to use YAML files with {@link PropertySource}
+ * Enables the use of YAML files with {@link PropertySource}
  * by referencing this class in the factory attribute
  */
 public class YamlPropertySourceFactory implements PropertySourceFactory {
