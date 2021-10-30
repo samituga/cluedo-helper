@@ -15,6 +15,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
+/**
+ * Will intercept the requests and responses made with {@link org.springframework.web.client.RestTemplate}
+ * and log the communication with {@link #logCommunication(HttpRequest, byte[], ClientHttpResponse)}
+ */
 @RequiredArgsConstructor
 public class HttpInterceptor implements ClientHttpRequestInterceptor {
 
