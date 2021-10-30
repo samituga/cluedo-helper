@@ -3,6 +3,9 @@ package com.perso.cluedohelper.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 
+/**
+ * An abstract exception to represent all custom exceptions related to this project
+ */
 @Validated
 public abstract class BaseException extends RuntimeException {
 

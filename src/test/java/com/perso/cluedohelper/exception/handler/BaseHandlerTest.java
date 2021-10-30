@@ -1,12 +1,13 @@
 package com.perso.cluedohelper.exception.handler;
 
-import com.perso.cluedohelper.exception.ImpossibleMoveException;
+import com.perso.cluedohelper.exception.BaseException;
 import com.perso.cluedohelper.exception.response.ErrorResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class BaseHandlerTest {
 
@@ -18,17 +19,26 @@ class BaseHandlerTest {
 		baseHandler = new BaseHandler();
 	}
 
-
 	@Test
 	void verifyBuildErrorResponseEntity() {
 
-		ImpossibleMoveException impossibleMoveException = new ImpossibleMoveException("mock");
+		BaseException baseException = new BaseException("mock") {
+			@Override
+			public HttpStatus httpStatus() {
+				return HttpStatus.OK;
+			}
 
-		ErrorResponse responseEntity = baseHandler.buildErrorResponseEntity(impossibleMoveException);
+			@Override
+			public String internalCode() {
+				return "internalCode - mock";
+			}
+		};
+
+		ErrorResponse responseEntity = baseHandler.buildErrorResponseEntity(baseException);
 
 		assertNotNull(responseEntity);
-		assertNotNull(responseEntity.getTraceId()); // TODO: 22/10/2021 get trace id
-		assertEquals(impossibleMoveException.getMessage(), responseEntity.getMessage());
-		assertEquals(impossibleMoveException.internalCode(), responseEntity.getInternalCode());
+//		assertNotNull(responseEntity.getTraceId()); // TODO: 29/10/2021 Assert this?
+		assertEquals(baseException.getMessage(), responseEntity.getMessage());
+		assertEquals(baseException.internalCode(), responseEntity.getInternalCode());
 	}
 }

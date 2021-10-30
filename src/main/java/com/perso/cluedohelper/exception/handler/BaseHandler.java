@@ -11,6 +11,12 @@ import java.time.LocalDateTime;
 class BaseHandler {
 
 
+	/**
+	 * Builds a {@link ErrorResponse} from a {@link BaseException}
+	 *
+	 * @param exception The exception to be transformed
+	 * @return an {@link ErrorResponse} built from the given exception
+	 */
 	protected ErrorResponse buildErrorResponseEntity(BaseException exception) {
 
 		return ErrorResponse.builder()
