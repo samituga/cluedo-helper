@@ -9,3 +9,11 @@ management:
     jmx:
       exposure:
         exclude: "*"
+
+logging:
+  level:
+    root: ERROR
+    org.springframework: ERROR
+    com.perso.cluedohelper: INFO
+    ExternalRequest: ERROR
+  config: classpath:log4j/log4j2-prod.yml

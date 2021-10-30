@@ -1,5 +1,6 @@
 package com.perso.cluedohelper.interceptor;
 
+import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpRequest;
@@ -14,17 +15,14 @@ import java.nio.charset.StandardCharsets;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 public class HttpInterceptor implements ClientHttpRequestInterceptor {
 
 	public String EXTERNAL_REQUEST_MESSAGE_FORMAT =
 		"%s [URI: {%s} | HTTP Code: {%s} | Headers: {%s} | Body: {%s}]";
 	public String HEADER_KEY_VALUE_FORMAT = "'%s' = %s";
 
-	private Logger logger;
-
-	public HttpInterceptor(Logger logger) {
-		this.logger = logger;
-	}
+	private final Logger logger;
 
 	@Override
 	public ClientHttpResponse intercept(HttpRequest request,

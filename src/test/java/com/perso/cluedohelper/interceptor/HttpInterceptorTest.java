@@ -21,8 +21,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.util.Objects.isNull;
 import static org.assertj.core.internal.bytebuddy.matcher.ElementMatchers.any;
 import static org.mockito.Mockito.*;
+
 
 @ExtendWith(MockitoExtension.class)
 class HttpInterceptorTest {
@@ -257,7 +259,7 @@ class HttpInterceptorTest {
 			}
 			headersBuilder.replace(headersBuilder.length() - 2, headersBuilder.length(), "");
 		}
-		String httpCodeString = httpCode == null ? "" : httpCode.toString();
+		String httpCodeString = isNull(httpCode) ? "" : httpCode.toString();
 		String headersString = headersBuilder.toString();
 
 		return String.format(format, uri, httpCodeString, headersString, body);
