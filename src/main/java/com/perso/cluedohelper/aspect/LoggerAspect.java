@@ -1,4 +1,4 @@
-package com.perso.cluedohelper.config.logger;
+package com.perso.cluedohelper.aspect;
 
 import com.perso.cluedohelper.util.LogManagerWrapper;
 import org.apache.logging.log4j.Logger;
