@@ -44,15 +44,17 @@ class HttpInterceptorTest {
 
 	private static final String MOCKED_URI = "https://foo.bar/baz";
 
-	private static final String REQUEST_BODY_PATTERN = "Request [URI: {%s} | "
+	private static final String REQUEST_BODY_FORMAT = "Request [URI: {%s} | "
 		+ "HTTP Code: {%s} | "
 		+ "Headers: {%s} | "
 		+ "Body: {%s}]";
 
-	private static final String RESPONSE_BODY_PATTERN = "Response [URI: {%s} | "
+	private static final String RESPONSE_BODY_FORMAT = "Response [URI: {%s} | "
 		+ "HTTP Code: {%s} | "
 		+ "Headers: {%s} | "
 		+ "Body: {%s}]";
+
+	private static final String HEADERS_FORMAT = "'%s' = [%s]";
 
 	private HttpInterceptor httpInterceptor;
 
@@ -142,14 +144,14 @@ class HttpInterceptorTest {
 		httpInterceptor.intercept(httpRequest, REQUEST_BODY.getBytes(UTF_8), clientHttpRequestExecution);
 
 		String expectedRequestMessage = buildBody(
-			REQUEST_BODY_PATTERN,
+			REQUEST_BODY_FORMAT,
 			MOCKED_URI,
 			null,
 			requestHeaders.toSingleValueMap(),
 			REQUEST_BODY);
 
 		String expectedResponseMessage = buildBody(
-			RESPONSE_BODY_PATTERN,
+			RESPONSE_BODY_FORMAT,
 			MOCKED_URI,
 			responseStatus,
 			responseHeaders.toSingleValueMap(),
@@ -188,14 +190,14 @@ class HttpInterceptorTest {
 		httpInterceptor.intercept(httpRequest, REQUEST_BODY.getBytes(UTF_8), clientHttpRequestExecution);
 
 		String expectedRequestMessage = buildBody(
-			REQUEST_BODY_PATTERN,
+			REQUEST_BODY_FORMAT,
 			MOCKED_URI,
 			null,
 			requestHeaders.toSingleValueMap(),
 			REQUEST_BODY);
 
 		String expectedResponseMessage = buildBody(
-			RESPONSE_BODY_PATTERN,
+			RESPONSE_BODY_FORMAT,
 			MOCKED_URI,
 			responseStatus,
 			responseHeaders.toSingleValueMap(),
@@ -252,15 +254,14 @@ class HttpInterceptorTest {
 							 Map<String, String> headers,
 							 String body) {
 
-		StringBuilder headersBuilder = new StringBuilder();
+		StringJoiner headersJoiner = new StringJoiner(", ");
 		if (!headers.isEmpty()) {
 			for (Map.Entry<String, String> entry : headers.entrySet()) {
-				headersBuilder.append("'").append(entry.getKey()).append("' = [").append(entry.getValue()).append("], ");
+				headersJoiner.add(String.format(HEADERS_FORMAT, entry.getKey(), entry.getValue()));
 			}
-			headersBuilder.replace(headersBuilder.length() - 2, headersBuilder.length(), "");
 		}
 		String httpCodeString = isNull(httpCode) ? "" : httpCode.toString();
-		String headersString = headersBuilder.toString();
+		String headersString = headersJoiner.toString();
 
 		return String.format(format, uri, httpCodeString, headersString, body);
 	}
