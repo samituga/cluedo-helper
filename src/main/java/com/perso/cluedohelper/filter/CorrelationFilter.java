@@ -1,7 +1,7 @@
 package com.perso.cluedohelper.filter;
 
+import com.perso.cluedohelper.annotation.LoggerQualifier;
 import io.micrometer.core.instrument.util.StringUtils;
-import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.ThreadContext;
 import org.springframework.core.Ordered;
@@ -15,14 +15,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
+import static com.perso.cluedohelper.annotation.LoggerQualifier.LoggerName.EXTERNAL_REQUEST;
 import static com.perso.cluedohelper.util.ApiConstants.CORRELATION_ID_KEY;
 
 @Component
-@RequiredArgsConstructor
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CorrelationFilter extends OncePerRequestFilter {
 
 	private final Logger logger;
+
+	public CorrelationFilter(@LoggerQualifier(loggerName = EXTERNAL_REQUEST) Logger logger) {
+		this.logger = logger;
+	}
 
 	@Override
 	protected void doFilterInternal(final HttpServletRequest request,

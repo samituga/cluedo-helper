@@ -2,6 +2,7 @@ package com.perso.cluedohelper.interceptor;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.ThreadContext;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.client.ClientHttpRequestExecution;
@@ -15,6 +16,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
+import static com.perso.cluedohelper.util.ApiConstants.CORRELATION_ID_KEY;
+
 /**
  * Will intercept the requests and responses made with {@link org.springframework.web.client.RestTemplate}
  * and log the communication with {@link #logCommunication(HttpRequest, byte[], ClientHttpResponse)}
@@ -22,16 +25,17 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class HttpInterceptor implements ClientHttpRequestInterceptor {
 
+	private final Logger logger;
 	public String EXTERNAL_REQUEST_MESSAGE_FORMAT =
 		"%s [URI: {%s} | HTTP Code: {%s} | Headers: {%s} | Body: {%s}]";
 	public String HEADER_KEY_VALUE_FORMAT = "'%s' = %s";
-
-	private final Logger logger;
 
 	@Override
 	public ClientHttpResponse intercept(HttpRequest request,
 										byte[] body,
 										ClientHttpRequestExecution execution) throws IOException {
+
+		request.getHeaders().add(CORRELATION_ID_KEY, ThreadContext.get(CORRELATION_ID_KEY));
 
 		ClientHttpResponse response = execution.execute(request, body);
 

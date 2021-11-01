@@ -13,7 +13,7 @@ management:
 logging:
   level:
     root: ERROR
-    org.springframework: ERROR
-    com.perso.cluedohelper: DEBUG
-    ExternalRequest: ERROR
+    org.springframework: INFO
+    com.perso.cluedohelper: TRACE
+    ExternalRequest: TRACE
   config: classpath:log4j/log4j2-local.yml
