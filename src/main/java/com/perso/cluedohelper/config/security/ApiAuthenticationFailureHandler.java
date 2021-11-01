@@ -1,4 +1,4 @@
-package com.perso.cluedohelper.config.logger.security;
+package com.perso.cluedohelper.config.security;
 
 import com.perso.cluedohelper.exception.response.ErrorResponse;
 import lombok.RequiredArgsConstructor;
