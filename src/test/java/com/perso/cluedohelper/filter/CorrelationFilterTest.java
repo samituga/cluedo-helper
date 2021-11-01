@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @SpringBootTest(classes = {CorrelationFilter.class, LoggerConfig.class})
 class CorrelationFilterTest {
 
-	public static final String CORRELATION_ID_KEY = "X-Correlation-ID";
+	private static final String CORRELATION_ID_KEY = "X-Correlation-ID";
 
 	@Autowired
 	private MockMvc mockMvc;

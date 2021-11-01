@@ -20,13 +20,11 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+	private final ApiAuthenticationFailureHandler apiAuthenticationFailureHandler;
 	@Value("${cluedohelper.http.auth-token-header-name}")
 	private String principalRequestHeader;
-
 	@Value("${cluedohelper.http.auth-token}")
 	private String principalRequestValue;
-
-	private final ApiAuthenticationFailureHandler apiAuthenticationFailureHandler;
 
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
