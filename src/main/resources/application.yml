@@ -1,9 +1,16 @@
 spring:
   profiles:
     active: '@activeProfiles@'
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
 
 server:
   port: ${env.SERVER_PORT:8080}
+
+cluedohelper:
+  http:
+    auth-token-header-name: X-API-Key
+    auth-token: ${env.AUTH_TOKEN}
 
 app:
   version: '@revision@'
