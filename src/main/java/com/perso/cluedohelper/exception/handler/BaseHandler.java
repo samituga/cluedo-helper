@@ -20,7 +20,7 @@ class BaseHandler {
 	protected ErrorResponse buildErrorResponseEntity(BaseException exception) {
 
 		return ErrorResponse.builder()
-			.traceId(null) // TODO: 22/10/2021 Get trace id
+			.correlationId(exception.getCorrelationId())
 			.timestamp(LocalDateTime.now())
 			.message(exception.getMessage())
 			.internalCode(exception.internalCode())

@@ -11,7 +11,7 @@ import java.util.List;
 
 @JsonPropertyOrder({
 	"timestamp",
-	"trace_id",
+	"correlation_id",
 	"status_code",
 	"message",
 	"internal_code",
@@ -30,8 +30,8 @@ public class ErrorResponse {
 	@JsonProperty("timestamp")
 	private LocalDateTime timestamp;
 	@NotBlank
-	@JsonProperty("trace_id")
-	private String traceId;
+	@JsonProperty("correlation_id")
+	private String correlationId;
 	@NotBlank
 	@JsonProperty("message")
 	private String message;

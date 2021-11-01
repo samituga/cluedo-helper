@@ -3,7 +3,7 @@ Configuration:
     Console:
       PatternLayout:
         pattern: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level]  \
-        %notEmpty{[trace_id: %X{trace_id} }\
+        %notEmpty{[correlation_id: %X{X-Correlation-ID}] }\
         %c{1}%highlight{ | %msg%throwable }\
         %highlight{%notEmpty{| cause: %X{exception_cause} }}\
         %highlight{%notEmpty{| stack_trace: %X{exception_stack_trace} }}%n"

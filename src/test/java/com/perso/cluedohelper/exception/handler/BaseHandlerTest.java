@@ -6,8 +6,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class BaseHandlerTest {
 
@@ -22,7 +23,7 @@ class BaseHandlerTest {
 	@Test
 	void verifyBuildErrorResponseEntity() {
 
-		BaseException baseException = new BaseException("mock") {
+		BaseException baseException = new BaseException("mock", UUID.randomUUID().toString()) {
 			@Override
 			public HttpStatus httpStatus() {
 				return HttpStatus.OK;
@@ -37,7 +38,8 @@ class BaseHandlerTest {
 		ErrorResponse responseEntity = baseHandler.buildErrorResponseEntity(baseException);
 
 		assertNotNull(responseEntity);
-//		assertNotNull(responseEntity.getTraceId()); // TODO: 29/10/2021 Assert this?
+		assertNotNull(responseEntity.getCorrelationId());
+		assertFalse(responseEntity.getCorrelationId().isEmpty());
 		assertEquals(baseException.getMessage(), responseEntity.getMessage());
 		assertEquals(baseException.internalCode(), responseEntity.getInternalCode());
 	}
