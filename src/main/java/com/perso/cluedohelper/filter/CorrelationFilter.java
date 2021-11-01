@@ -18,6 +18,10 @@ import java.util.UUID;
 import static com.perso.cluedohelper.annotation.LoggerQualifier.LoggerName.EXTERNAL_REQUEST;
 import static com.perso.cluedohelper.util.ApiConstants.CORRELATION_ID_KEY;
 
+/**
+ * Filter to handle the correlation header, uses the request correlation id if it exists
+ * else it will create a new one and dispose it at the end
+ */
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CorrelationFilter extends OncePerRequestFilter {
