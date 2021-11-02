@@ -6,6 +6,7 @@ import lombok.experimental.UtilityClass;
 public class ErrorCodeConstants {
 
 	public static final String CH000 = "CH000";
+	public static final String CH001 = "CH001";
 
 
 }

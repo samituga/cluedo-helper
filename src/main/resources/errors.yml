@@ -4,3 +4,7 @@ cluedohelper:
       code: CH000
       message: Example
       http-code: 500
+    CH001:
+      code: CH001
+      message: Api key not found or not valid
+      http-code: 403

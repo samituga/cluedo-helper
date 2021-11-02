@@ -1,5 +1,7 @@
 package com.perso.cluedohelper.config.security;
 
+import com.perso.cluedohelper.config.errors.ErrorConfig;
+import com.perso.cluedohelper.config.errors.ErrorDetail;
 import com.perso.cluedohelper.exception.response.ErrorResponse;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.ThreadContext;
@@ -18,6 +20,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 
 import static com.perso.cluedohelper.util.ApiConstants.CORRELATION_ID_KEY;
+import static com.perso.cluedohelper.util.ErrorCodeConstants.CH001;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -28,15 +31,18 @@ import static java.util.Objects.requireNonNull;
 public class ApiAuthenticationFailureHandler implements AuthenticationEntryPoint {
 
 	private final MappingJackson2HttpMessageConverter messageConverter;
+	private final ErrorConfig errorConfig;
 
 	@Override
 	public void commence(final HttpServletRequest request,
 						 final HttpServletResponse response,
 						 final AuthenticationException exception) throws IOException {
 
-		ErrorResponse errorResponse = ErrorResponse.builder() // TODO: 01/11/2021 Get the information for this fields
-			.internalCode("internalCode")
-			.message("message")
+		ErrorDetail errorDetail = errorConfig.get(CH001);
+
+		ErrorResponse errorResponse = ErrorResponse.builder()
+			.internalCode(errorDetail.getCode())
+			.message(errorDetail.getMessage())
 			.correlationId(ThreadContext.get(CORRELATION_ID_KEY))
 			.timestamp(LocalDateTime.now())
 			.build();
