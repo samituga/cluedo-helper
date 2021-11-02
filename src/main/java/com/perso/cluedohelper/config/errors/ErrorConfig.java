@@ -2,7 +2,6 @@ package com.perso.cluedohelper.config.errors;
 
 import com.perso.cluedohelper.config.YamlPropertySourceFactory;
 import lombok.Data;
-import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

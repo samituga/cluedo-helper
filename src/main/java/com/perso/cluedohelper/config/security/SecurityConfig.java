@@ -4,10 +4,8 @@ import com.perso.cluedohelper.filter.APIKeyAuthFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -38,12 +36,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 			.exceptionHandling()
 			.authenticationEntryPoint(apiAuthenticationFailureHandler);
-	}
-
-	@Override
-	public void configure(final WebSecurity web) {
-		web.ignoring()
-			.antMatchers(HttpMethod.OPTIONS, "/**");
 	}
 
 
