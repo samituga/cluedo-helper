@@ -16,3 +16,7 @@ cluedohelper:
       code: CH_RESOURCE_NOT_FOUND
       message: Resource not found
       http-code: 404
+    CH_REQUEST_PARAM_FAILURE:
+      code: CH_REQUEST_PARAM_FAILURE
+      message: Request param failure
+      http-code: 400

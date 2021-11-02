@@ -28,7 +28,7 @@ class BaseHandlerTest {
 		ErrorDetail errorDetail = new ErrorDetail("code", "message", HttpStatus.I_AM_A_TEAPOT);
 		ThreadContextWrapper.putCorrelationId("mock");
 
-		ErrorResponse responseEntity = baseHandler.buildErrorResponseEntity(errorDetail);
+		ErrorResponse responseEntity = baseHandler.buildErrorResponse(errorDetail);
 
 		assertNotNull(responseEntity);
 		assertNotNull(responseEntity.getCorrelationId());
@@ -45,7 +45,7 @@ class BaseHandlerTest {
 
 		ThreadContextWrapper.putCorrelationId("mock");
 
-		ErrorResponse responseEntity = baseHandler.buildErrorResponseEntity(errorDetail, customMessage);
+		ErrorResponse responseEntity = baseHandler.buildErrorResponse(errorDetail, customMessage);
 
 		assertNotNull(responseEntity);
 		assertNotNull(responseEntity.getCorrelationId());

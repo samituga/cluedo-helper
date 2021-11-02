@@ -12,4 +12,5 @@ public class ErrorCodeConstants {
 	public static final String CH_API_KEY_INVALID = "CH_API_KEY_INVALID";
 	public static final String CH_BASE_ERROR = "CH_BASE_ERROR";
 	public static final String CH_RESOURCE_NOT_FOUND = "CH_RESOURCE_NOT_FOUND";
+	public static final String CH_REQUEST_PARAM_FAILURE = "CH_REQUEST_PARAM_FAILURE";
 }

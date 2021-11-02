@@ -22,7 +22,7 @@ class BaseHandler {
 
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<ErrorResponse> exceptionHandler(final Exception e) {
-		final ErrorResponse error = buildErrorResponseEntity(errorConfig.get(CH_BASE_ERROR));
+		final ErrorResponse error = buildErrorResponse(errorConfig.get(CH_BASE_ERROR));
 		return ResponseEntity.status(errorConfig.get(CH_BASE_ERROR).getHttpCode()).body(error);
 	}
 
@@ -32,8 +32,8 @@ class BaseHandler {
 	 * @param errorDetail The error detail to be mapped
 	 * @return an {@link ErrorResponse} built from the given exception
 	 */
-	protected ErrorResponse buildErrorResponseEntity(ErrorDetail errorDetail) {
-		return buildErrorResponseEntity(errorDetail, errorDetail.getMessage());
+	protected ErrorResponse buildErrorResponse(ErrorDetail errorDetail) {
+		return buildErrorResponse(errorDetail, errorDetail.getMessage());
 	}
 
 	/**
@@ -43,7 +43,7 @@ class BaseHandler {
 	 * @param message     Custom message
 	 * @return an {@link ErrorResponse} built from the given exception
 	 */
-	protected ErrorResponse buildErrorResponseEntity(ErrorDetail errorDetail, String message) {
+	protected ErrorResponse buildErrorResponse(ErrorDetail errorDetail, String message) {
 
 		return ErrorResponse.builder()
 			.correlationId(ThreadContextWrapper.getCorrelationId())

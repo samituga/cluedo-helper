@@ -9,6 +9,8 @@ import org.springframework.context.annotation.PropertySource;
 
 import java.util.Map;
 
+import static java.util.Objects.isNull;
+
 /**
  * Configuration class to load errors details from a resource file
  */
@@ -28,6 +30,10 @@ public class ErrorConfig {
 	 * @return the {@link ErrorDetail}
 	 */
 	public ErrorDetail get(final String errorCode) {
-		return errors.get(errorCode);
+		ErrorDetail errorDetail = errors.get(errorCode);
+		if (isNull(errorDetail)) {
+			throw new IllegalArgumentException();
+		}
+		return errorDetail;
 	}
 }
