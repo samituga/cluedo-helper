@@ -1,0 +1,6 @@
+cluedohelper:
+  errors:
+    CH000:
+      code: CH000
+      message: Example
+      http-code: 500
