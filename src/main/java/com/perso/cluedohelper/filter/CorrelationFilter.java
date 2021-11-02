@@ -1,9 +1,9 @@
 package com.perso.cluedohelper.filter;
 
 import com.perso.cluedohelper.annotation.LoggerQualifier;
+import com.perso.cluedohelper.util.ThreadContextWrapper;
 import io.micrometer.core.instrument.util.StringUtils;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.ThreadContext;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -44,11 +44,11 @@ public class CorrelationFilter extends OncePerRequestFilter {
 			} else {
 				correlationId = UUID.randomUUID().toString().toUpperCase().replace("-", "");
 			}
-			ThreadContext.put(CORRELATION_ID_KEY, correlationId);
+			ThreadContextWrapper.putCorrelationId(correlationId);
 			response.addHeader(CORRELATION_ID_KEY, correlationId);
 			chain.doFilter(request, response);
 		} finally {
-			ThreadContext.remove(CORRELATION_ID_KEY);
+			ThreadContextWrapper.removeCorrelationId();
 		}
 	}
 }

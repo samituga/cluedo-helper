@@ -3,8 +3,8 @@ package com.perso.cluedohelper.config.security;
 import com.perso.cluedohelper.config.errors.ErrorConfig;
 import com.perso.cluedohelper.config.errors.ErrorDetail;
 import com.perso.cluedohelper.exception.response.ErrorResponse;
+import com.perso.cluedohelper.util.ThreadContextWrapper;
 import lombok.RequiredArgsConstructor;
-import org.apache.logging.log4j.ThreadContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-import static com.perso.cluedohelper.util.ApiConstants.CORRELATION_ID_KEY;
 import static com.perso.cluedohelper.util.ErrorCodeConstants.CH001;
 import static java.util.Objects.requireNonNull;
 
@@ -43,7 +42,7 @@ public class ApiAuthenticationFailureHandler implements AuthenticationEntryPoint
 		ErrorResponse errorResponse = ErrorResponse.builder()
 			.internalCode(errorDetail.getCode())
 			.message(errorDetail.getMessage())
-			.correlationId(ThreadContext.get(CORRELATION_ID_KEY))
+			.correlationId(ThreadContextWrapper.getCorrelationId())
 			.timestamp(LocalDateTime.now())
 			.build();
 

@@ -18,6 +18,14 @@ public class ThreadContextWrapper {
 		return ThreadContext.get(CORRELATION_ID_KEY);
 	}
 
+	public static void putCorrelationId(String value) {
+		ThreadContext.put(CORRELATION_ID_KEY, value);
+	}
+
+	public static void removeCorrelationId() {
+		ThreadContext.remove(CORRELATION_ID_KEY);
+	}
+
 	public static void put(String key, String value) {
 		ThreadContext.put(key, value);
 	}

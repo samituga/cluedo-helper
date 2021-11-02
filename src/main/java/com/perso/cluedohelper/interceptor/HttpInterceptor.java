@@ -1,8 +1,8 @@
 package com.perso.cluedohelper.interceptor;
 
+import com.perso.cluedohelper.util.ThreadContextWrapper;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.ThreadContext;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.client.ClientHttpRequestExecution;
@@ -35,7 +35,7 @@ public class HttpInterceptor implements ClientHttpRequestInterceptor {
 										byte[] body,
 										ClientHttpRequestExecution execution) throws IOException {
 
-		request.getHeaders().add(CORRELATION_ID_KEY, ThreadContext.get(CORRELATION_ID_KEY));
+		request.getHeaders().add(CORRELATION_ID_KEY, ThreadContextWrapper.getCorrelationId());
 
 		ClientHttpResponse response = execution.execute(request, body);
 
