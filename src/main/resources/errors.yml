@@ -1,10 +1,18 @@
 cluedohelper:
   errors:
-    CH000:
-      code: CH000
+    CH_ERROR_EXAMPLE:
+      code: CH_ERROR_EXAMPLE
       message: Example
       http-code: 500
-    CH001:
-      code: CH001
+    CH_API_KEY_INVALID:
+      code: CH_API_KEY_INVALID
       message: Api key not found or not valid
       http-code: 403
+    CH_BASE_ERROR:
+      code: CH_BASE_ERROR
+      message: Server error
+      http-code: 500
+    CH_RESOURCE_NOT_FOUND:
+      code: CH_RESOURCE_NOT_FOUND
+      message: Resource not found
+      http-code: 404

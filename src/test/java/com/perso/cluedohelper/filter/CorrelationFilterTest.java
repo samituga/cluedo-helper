@@ -11,7 +11,8 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 
 import java.net.URI;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
@@ -53,7 +54,7 @@ class CorrelationFilterTest {
 			.getResponse();
 
 		String responseCorrelationId = response.getHeader(CORRELATION_ID_KEY);
-		assertEquals(mockedCorrelationId, responseCorrelationId);
+		assertThat(mockedCorrelationId, equalTo(responseCorrelationId));
 	}
 
 }

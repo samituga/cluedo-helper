@@ -1,14 +1,14 @@
 package com.perso.cluedohelper.exception.handler;
 
-import com.perso.cluedohelper.exception.BaseException;
+import com.perso.cluedohelper.config.errors.ErrorDetail;
 import com.perso.cluedohelper.exception.response.ErrorResponse;
+import com.perso.cluedohelper.util.ThreadContextWrapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 
-import java.util.UUID;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -19,30 +19,38 @@ class BaseHandlerTest {
 
 	@BeforeEach
 	void setUp() {
-		baseHandler = new BaseHandler();
+		baseHandler = new BaseHandler(null);
 	}
 
 	@Test
 	void verifyBuildErrorResponseEntity() {
 
-		BaseException baseException = new BaseException("mock", UUID.randomUUID().toString()) {
-			@Override
-			public HttpStatus httpStatus() {
-				return HttpStatus.OK;
-			}
+		ErrorDetail errorDetail = new ErrorDetail("code", "message", HttpStatus.I_AM_A_TEAPOT);
+		ThreadContextWrapper.putCorrelationId("mock");
 
-			@Override
-			public String internalCode() {
-				return "internalCode - mock";
-			}
-		};
-
-		ErrorResponse responseEntity = baseHandler.buildErrorResponseEntity(baseException);
+		ErrorResponse responseEntity = baseHandler.buildErrorResponseEntity(errorDetail);
 
 		assertNotNull(responseEntity);
 		assertNotNull(responseEntity.getCorrelationId());
 		assertFalse(responseEntity.getCorrelationId().isEmpty());
-		assertEquals(baseException.getMessage(), responseEntity.getMessage());
-		assertEquals(baseException.internalCode(), responseEntity.getInternalCode());
+		assertThat(responseEntity.getMessage(), equalTo(errorDetail.getMessage()));
+		assertThat(responseEntity.getInternalCode(), equalTo(errorDetail.getCode()));
+	}
+
+	@Test
+	void verifyBuildErrorResponseEntityWithCustomMessage() {
+
+		ErrorDetail errorDetail = new ErrorDetail("code", "message", HttpStatus.I_AM_A_TEAPOT);
+		String customMessage = "Custom message";
+
+		ThreadContextWrapper.putCorrelationId("mock");
+
+		ErrorResponse responseEntity = baseHandler.buildErrorResponseEntity(errorDetail, customMessage);
+
+		assertNotNull(responseEntity);
+		assertNotNull(responseEntity.getCorrelationId());
+		assertFalse(responseEntity.getCorrelationId().isEmpty());
+		assertThat(responseEntity.getMessage(), equalTo(customMessage));
+		assertThat(responseEntity.getInternalCode(), equalTo(errorDetail.getCode()));
 	}
 }

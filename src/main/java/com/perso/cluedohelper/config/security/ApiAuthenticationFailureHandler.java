@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-import static com.perso.cluedohelper.util.ErrorCodeConstants.CH001;
+import static com.perso.cluedohelper.util.ErrorCodeConstants.CH_API_KEY_INVALID;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -37,7 +37,7 @@ public class ApiAuthenticationFailureHandler implements AuthenticationEntryPoint
 						 final HttpServletResponse response,
 						 final AuthenticationException exception) throws IOException {
 
-		ErrorDetail errorDetail = errorConfig.get(CH001);
+		ErrorDetail errorDetail = errorConfig.get(CH_API_KEY_INVALID);
 
 		ErrorResponse errorResponse = ErrorResponse.builder()
 			.internalCode(errorDetail.getCode())
