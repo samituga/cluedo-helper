@@ -1,0 +1,50 @@
+cluedohelper:
+
+  cards:
+    characters:
+      GREEN:
+        name: Mr. Green
+      MUSTARD:
+        name: Colonel Mustard
+      PEACOCK:
+        name: Mrs. Peacock
+      PLUM:
+        name: Professor Plum
+      SCARLETT:
+        name: Miss Scarlett
+      ORCHID:
+        name: Dr. Orchid
+
+    weapons:
+      CANDLESTICK:
+        name: Candlestick
+      DAGGER:
+        name: Dagger
+      LEAD_PIPE:
+        name: Lead Pipe
+      REVOLVER:
+        name: Revolver
+      ROPE:
+        name: Rope
+      WRENCH:
+        name: Wrench
+
+    rooms:
+      BALLROOM:
+        name: Ballroom
+      BILLIARD_ROOM:
+        name: Billiard Room
+      CONSERVATORY:
+        name: Conservatory
+      DINING_ROOM:
+        name: Dining Room
+      HALL:
+        name: Hall
+      KITCHEN:
+        name: Kitchen
+      LIBRARY:
+        name: Library
+      LOUNGE:
+        name: Lounge
+      STUDY:
+        name: Study
