@@ -1,6 +1,6 @@
 package com.perso.cluedohelper.api.config.errors;
 
-import com.perso.cluedohelper.api.config.YamlPropertySourceFactory;
+import com.perso.cluedohelper.common.config.YamlPropertySourceFactory;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -17,11 +17,11 @@ import static java.util.Objects.isNull;
 @Setter
 @Configuration
 @EnableConfigurationProperties
-@ConfigurationProperties(prefix = "cluedohelper")
+@ConfigurationProperties(prefix = "cluedohelper.errors")
 @PropertySource(factory = YamlPropertySourceFactory.class, value = "classpath:errors.yml")
 public class ErrorConfig {
 
-	private Map<String, ErrorDetail> errors;
+	private Map<String, ErrorDetail> map;
 
 	/**
 	 * Getter for the {@link ErrorDetail error}
@@ -30,7 +30,7 @@ public class ErrorConfig {
 	 * @return the {@link ErrorDetail}
 	 */
 	public ErrorDetail get(final String errorCode) {
-		ErrorDetail errorDetail = errors.get(errorCode);
+		ErrorDetail errorDetail = map.get(errorCode);
 		if (isNull(errorDetail)) {
 			throw new IllegalArgumentException();
 		}

@@ -1,4 +1,4 @@
-package com.perso.cluedohelper.api.config;
+package com.perso.cluedohelper.common.config;
 
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
 import org.springframework.core.env.PropertiesPropertySource;
