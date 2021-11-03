@@ -6,6 +6,9 @@ spring:
   web:
     resources:
       add-mappings: false
+  redis:
+    host: ${env.REDIS_HOST}
+    port: ${env.REDIS_PORT}
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
 
