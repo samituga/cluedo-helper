@@ -9,9 +9,9 @@
         <relativePath/>
     </parent>
     <groupId>com.perso</groupId>
-    <artifactId>cluedohelper</artifactId>
+    <artifactId>cluedo-helper-api</artifactId>
     <version>${revision}</version>
-    <name>cluedo helper</name>
+    <name>cluedo-helper-api</name>
     <description>API to provide help during a Cluedo game</description>
 
     <properties>
