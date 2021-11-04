@@ -20,9 +20,17 @@
         <springdoc.version>1.5.11</springdoc.version>
         <dotenv.version>2.3.0</dotenv.version>
         <commons-pool2.version>2.11.1</commons-pool2.version>
+        <cluedo-helper-library.version>0.0.1-SNAPSHOT</cluedo-helper-library.version>
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>com.perso</groupId>
+            <artifactId>cluedo-helper-library</artifactId>
+            <version>${cluedo-helper-library.version}</version>
+        </dependency>
+
         <!-- <Validation> -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
