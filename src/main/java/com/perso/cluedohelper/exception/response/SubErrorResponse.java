@@ -4,15 +4,17 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import javax.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.constraints.NotBlank;
-
+/**
+ * Contains additional info about an error.
+ */
 @JsonPropertyOrder({
-	"title",
-	"description"
+    "title",
+    "description"
 })
 @Data
 @Builder
@@ -21,11 +23,11 @@ import javax.validation.constraints.NotBlank;
 @JsonIgnoreProperties(ignoreUnknown = false)
 public class SubErrorResponse {
 
-	@NotBlank
-	@JsonProperty("title")
-	private String title;
+  @NotBlank
+  @JsonProperty("title")
+  private String title;
 
-	@NotBlank
-	@JsonProperty("description")
-	private String description;
+  @NotBlank
+  @JsonProperty("description")
+  private String description;
 }
