@@ -17,6 +17,6 @@ Configuration:
         ref: Console
     Logger:
       additivity: false
-      name: com.perso.cluedohelper
+      name: com.perso.cluedohelperapi
       AppenderRef:
         ref: Console
