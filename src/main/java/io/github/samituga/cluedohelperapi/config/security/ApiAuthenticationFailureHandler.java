@@ -33,8 +33,8 @@ public class ApiAuthenticationFailureHandler implements AuthenticationEntryPoint
 
   @Override
   public void commence(final HttpServletRequest request,
-                       final HttpServletResponse response,
-                       final AuthenticationException exception) throws IOException {
+      final HttpServletResponse response,
+      final AuthenticationException exception) throws IOException {
 
     ErrorDetail errorDetail = errorConfig.get(ErrorCodeConstants.CH_API_KEY_INVALID);
 

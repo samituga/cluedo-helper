@@ -33,8 +33,8 @@ public class CorrelationFilter extends OncePerRequestFilter {
 
   @Override
   protected void doFilterInternal(final HttpServletRequest request,
-                                  final HttpServletResponse response,
-                                  final FilterChain chain)
+      final HttpServletResponse response,
+      final FilterChain chain)
       throws java.io.IOException, ServletException {
     try {
       final String correlationId;

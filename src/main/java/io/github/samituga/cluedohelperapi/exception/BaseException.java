@@ -24,7 +24,7 @@ public abstract class BaseException extends RuntimeException {
   }
 
   public BaseException(String message, Throwable cause, boolean enableSuppression,
-                       boolean writableStackTrace, String correlationId) {
+      boolean writableStackTrace, String correlationId) {
     super(message, cause, enableSuppression, writableStackTrace);
     this.correlationId = correlationId;
   }

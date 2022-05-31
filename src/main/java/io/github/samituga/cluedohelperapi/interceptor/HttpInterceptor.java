@@ -31,8 +31,8 @@ public class HttpInterceptor implements ClientHttpRequestInterceptor {
 
   @Override
   public ClientHttpResponse intercept(HttpRequest request,
-                                      byte[] body,
-                                      ClientHttpRequestExecution execution) throws IOException {
+      byte[] body,
+      ClientHttpRequestExecution execution) throws IOException {
 
     request.getHeaders()
         .add(ApiConstants.CORRELATION_ID_KEY, ThreadContextWrapper.getCorrelationId());
@@ -80,8 +80,8 @@ public class HttpInterceptor implements ClientHttpRequestInterceptor {
   }
 
   private RequestResponseLoggingMessage buildRequestResponseMessage(HttpRequest request,
-                                                                    byte[] body,
-                                                                    ClientHttpResponse response)
+      byte[] body,
+      ClientHttpResponse response)
       throws IOException {
 
     final String requestBodyToLog = new String(body, StandardCharsets.UTF_8);
@@ -91,7 +91,6 @@ public class HttpInterceptor implements ClientHttpRequestInterceptor {
     final String responseHeadersString = headersToString(response.getHeaders());
 
     final String uriString = request.getURI().toString();
-
 
     final String requestMessage = buildMessage(
         "Request",
@@ -124,10 +123,10 @@ public class HttpInterceptor implements ClientHttpRequestInterceptor {
   }
 
   private String buildMessage(String prefix,
-                              String httpStatus,
-                              String headersString,
-                              String uriString,
-                              String body) {
+      String httpStatus,
+      String headersString,
+      String uriString,
+      String body) {
 
     return String.format(
         EXTERNAL_REQUEST_MESSAGE_FORMAT,

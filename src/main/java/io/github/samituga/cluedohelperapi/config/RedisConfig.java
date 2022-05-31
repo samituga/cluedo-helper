@@ -50,7 +50,7 @@ public class RedisConfig {
 
   @Bean
   LettucePoolingClientConfiguration lettucePoolConfig(ClientOptions options,
-                                                      ClientResources clientResources) {
+      ClientResources clientResources) {
     return LettucePoolingClientConfiguration.builder()
         .poolConfig(new GenericObjectPoolConfig())
         .clientOptions(options)
