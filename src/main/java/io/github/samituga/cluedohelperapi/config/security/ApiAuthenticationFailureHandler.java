@@ -28,26 +28,26 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ApiAuthenticationFailureHandler implements AuthenticationEntryPoint {
 
-  private final MappingJackson2HttpMessageConverter messageConverter;
-  private final ErrorConfig errorConfig;
+    private final MappingJackson2HttpMessageConverter messageConverter;
+    private final ErrorConfig errorConfig;
 
-  @Override
-  public void commence(final HttpServletRequest request,
-      final HttpServletResponse response,
-      final AuthenticationException exception) throws IOException {
+    @Override
+    public void commence(final HttpServletRequest request,
+                         final HttpServletResponse response,
+                         final AuthenticationException exception) throws IOException {
 
-    ErrorDetail errorDetail = errorConfig.get(ErrorCodeConstants.CH_API_KEY_INVALID);
+        ErrorDetail errorDetail = errorConfig.get(ErrorCodeConstants.CH_API_KEY_INVALID);
 
-    ErrorResponse errorResponse = ErrorResponse.builder()
-        .internalCode(errorDetail.getCode())
-        .message(errorDetail.getMessage())
-        .correlationId(ThreadContextWrapper.getCorrelationId())
-        .timestamp(LocalDateTime.now())
-        .build();
+        ErrorResponse errorResponse = ErrorResponse.builder()
+              .internalCode(errorDetail.getCode())
+              .message(errorDetail.getMessage())
+              .correlationId(ThreadContextWrapper.getCorrelationId())
+              .timestamp(LocalDateTime.now())
+              .build();
 
-    final ServerHttpResponse outputMessage = new ServletServerHttpResponse(response);
-    outputMessage.setStatusCode(requireNonNull(HttpStatus.FORBIDDEN));
+        final ServerHttpResponse outputMessage = new ServletServerHttpResponse(response);
+        outputMessage.setStatusCode(requireNonNull(HttpStatus.FORBIDDEN));
 
-    messageConverter.write(errorResponse, MediaType.APPLICATION_JSON, outputMessage);
-  }
+        messageConverter.write(errorResponse, MediaType.APPLICATION_JSON, outputMessage);
+    }
 }

@@ -17,21 +17,21 @@ import org.springframework.context.annotation.Scope;
 @Configuration
 public class LoggerConfig {
 
-  /**
-   * {@link Logger} bean to be injected.
-   *
-   * @param injectionPoint the point in code where the {@link Logger} is being injected
-   * @return A {@link Logger} for the respective class
-   */
-  @Bean
-  @Scope(SCOPE_PROTOTYPE)
-  Logger logger(InjectionPoint injectionPoint) {
-    return LogManagerWrapper.getLogger(injectionPoint);
-  }
+    /**
+     * {@link Logger} bean to be injected.
+     *
+     * @param injectionPoint the point in code where the {@link Logger} is being injected
+     * @return A {@link Logger} for the respective class
+     */
+    @Bean
+    @Scope(SCOPE_PROTOTYPE)
+    Logger logger(InjectionPoint injectionPoint) {
+        return LogManagerWrapper.getLogger(injectionPoint);
+    }
 
-  @Bean
-  @LoggerQualifier(loggerName = EXTERNAL_REQUEST)
-  public Logger externalRequestLogger() {
-    return LogManagerWrapper.getLogger(EXTERNAL_REQUEST.toString());
-  }
+    @Bean
+    @LoggerQualifier(loggerName = EXTERNAL_REQUEST)
+    public Logger externalRequestLogger() {
+        return LogManagerWrapper.getLogger(EXTERNAL_REQUEST.toString());
+    }
 }

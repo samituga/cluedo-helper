@@ -15,42 +15,42 @@ import org.springframework.http.HttpStatus;
 class BaseHandlerTest {
 
 
-  private BaseHandler baseHandler;
+    private BaseHandler baseHandler;
 
-  @BeforeEach
-  void setUp() {
-    baseHandler = new BaseHandler(null);
-  }
+    @BeforeEach
+    void setUp() {
+        baseHandler = new BaseHandler(null);
+    }
 
-  @Test
-  void verifyBuildErrorResponseEntity() {
+    @Test
+    void verifyBuildErrorResponseEntity() {
 
-    ErrorDetail errorDetail = new ErrorDetail("code", "message", HttpStatus.I_AM_A_TEAPOT);
-    ThreadContextWrapper.putCorrelationId("mock");
+        ErrorDetail errorDetail = new ErrorDetail("code", "message", HttpStatus.I_AM_A_TEAPOT);
+        ThreadContextWrapper.putCorrelationId("mock");
 
-    ErrorResponse responseEntity = baseHandler.buildErrorResponse(errorDetail);
+        ErrorResponse responseEntity = baseHandler.buildErrorResponse(errorDetail);
 
-    assertNotNull(responseEntity);
-    assertNotNull(responseEntity.getCorrelationId());
-    assertFalse(responseEntity.getCorrelationId().isEmpty());
-    assertThat(responseEntity.getMessage(), equalTo(errorDetail.getMessage()));
-    assertThat(responseEntity.getInternalCode(), equalTo(errorDetail.getCode()));
-  }
+        assertNotNull(responseEntity);
+        assertNotNull(responseEntity.getCorrelationId());
+        assertFalse(responseEntity.getCorrelationId().isEmpty());
+        assertThat(responseEntity.getMessage(), equalTo(errorDetail.getMessage()));
+        assertThat(responseEntity.getInternalCode(), equalTo(errorDetail.getCode()));
+    }
 
-  @Test
-  void verifyBuildErrorResponseEntityWithCustomMessage() {
+    @Test
+    void verifyBuildErrorResponseEntityWithCustomMessage() {
 
-    ErrorDetail errorDetail = new ErrorDetail("code", "message", HttpStatus.I_AM_A_TEAPOT);
-    String customMessage = "Custom message";
+        ErrorDetail errorDetail = new ErrorDetail("code", "message", HttpStatus.I_AM_A_TEAPOT);
+        String customMessage = "Custom message";
 
-    ThreadContextWrapper.putCorrelationId("mock");
+        ThreadContextWrapper.putCorrelationId("mock");
 
-    ErrorResponse responseEntity = baseHandler.buildErrorResponse(errorDetail, customMessage);
+        ErrorResponse responseEntity = baseHandler.buildErrorResponse(errorDetail, customMessage);
 
-    assertNotNull(responseEntity);
-    assertNotNull(responseEntity.getCorrelationId());
-    assertFalse(responseEntity.getCorrelationId().isEmpty());
-    assertThat(responseEntity.getMessage(), equalTo(customMessage));
-    assertThat(responseEntity.getInternalCode(), equalTo(errorDetail.getCode()));
-  }
+        assertNotNull(responseEntity);
+        assertNotNull(responseEntity.getCorrelationId());
+        assertFalse(responseEntity.getCorrelationId().isEmpty());
+        assertThat(responseEntity.getMessage(), equalTo(customMessage));
+        assertThat(responseEntity.getInternalCode(), equalTo(errorDetail.getCode()));
+    }
 }

@@ -17,12 +17,12 @@ import org.springframework.validation.annotation.Validated;
  * necessary to the consumer.
  */
 @JsonPropertyOrder({
-    "timestamp",
-    "correlation_id",
-    "status_code",
-    "message",
-    "internal_code",
-    "sub_errors"
+      "timestamp",
+      "correlation_id",
+      "status_code",
+      "message",
+      "internal_code",
+      "sub_errors"
 })
 @Data
 @Builder
@@ -31,18 +31,18 @@ import org.springframework.validation.annotation.Validated;
 @JsonIgnoreProperties(ignoreUnknown = false)
 public class ErrorResponse {
 
-  @JsonProperty("sub_errors")
-  List<SubErrorResponse> subErrors;
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
-  @JsonProperty("timestamp")
-  private LocalDateTime timestamp;
-  @NotBlank
-  @JsonProperty("correlation_id")
-  private String correlationId;
-  @NotBlank
-  @JsonProperty("message")
-  private String message;
-  @NotBlank
-  @JsonProperty("internal_code")
-  private String internalCode;
+    @JsonProperty("sub_errors")
+    List<SubErrorResponse> subErrors;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
+    @JsonProperty("timestamp")
+    private LocalDateTime timestamp;
+    @NotBlank
+    @JsonProperty("correlation_id")
+    private String correlationId;
+    @NotBlank
+    @JsonProperty("message")
+    private String message;
+    @NotBlank
+    @JsonProperty("internal_code")
+    private String internalCode;
 }

@@ -20,19 +20,19 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource(factory = YamlPropertySourceFactory.class, value = "classpath:errors.yml")
 public class ErrorConfig {
 
-  private Map<String, ErrorDetail> map;
+    private Map<String, ErrorDetail> map;
 
-  /**
-   * Getter for the {@link ErrorDetail error}.
-   *
-   * @param errorCode The code of the error
-   * @return the {@link ErrorDetail}
-   */
-  public ErrorDetail get(final String errorCode) {
-    ErrorDetail errorDetail = map.get(errorCode);
-    if (isNull(errorDetail)) {
-      throw new IllegalArgumentException();
+    /**
+     * Getter for the {@link ErrorDetail error}.
+     *
+     * @param errorCode The code of the error
+     * @return the {@link ErrorDetail}
+     */
+    public ErrorDetail get(final String errorCode) {
+        ErrorDetail errorDetail = map.get(errorCode);
+        if (isNull(errorDetail)) {
+            throw new IllegalArgumentException();
+        }
+        return errorDetail;
     }
-    return errorDetail;
-  }
 }

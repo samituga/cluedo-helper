@@ -10,31 +10,31 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 public abstract class BaseException extends RuntimeException {
 
-  @NotEmpty
-  private final String correlationId;
+    @NotEmpty
+    private final String correlationId;
 
-  public BaseException(String message, String correlationId) {
-    super(message);
-    this.correlationId = correlationId;
-  }
+    public BaseException(String message, String correlationId) {
+        super(message);
+        this.correlationId = correlationId;
+    }
 
-  public BaseException(String message, Throwable cause, String correlationId) {
-    super(message, cause);
-    this.correlationId = correlationId;
-  }
+    public BaseException(String message, Throwable cause, String correlationId) {
+        super(message, cause);
+        this.correlationId = correlationId;
+    }
 
-  public BaseException(String message, Throwable cause, boolean enableSuppression,
-      boolean writableStackTrace, String correlationId) {
-    super(message, cause, enableSuppression, writableStackTrace);
-    this.correlationId = correlationId;
-  }
+    public BaseException(String message, Throwable cause, boolean enableSuppression,
+                         boolean writableStackTrace, String correlationId) {
+        super(message, cause, enableSuppression, writableStackTrace);
+        this.correlationId = correlationId;
+    }
 
 
-  public String getCorrelationId() {
-    return correlationId;
-  }
+    public String getCorrelationId() {
+        return correlationId;
+    }
 
-  public abstract HttpStatus httpStatus();
+    public abstract HttpStatus httpStatus();
 
-  public abstract String internalCode();
+    public abstract String internalCode();
 }

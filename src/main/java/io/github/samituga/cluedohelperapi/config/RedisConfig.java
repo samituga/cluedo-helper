@@ -23,62 +23,63 @@ import org.springframework.data.redis.core.RedisTemplate;
 @RequiredArgsConstructor
 public class RedisConfig {
 
-  private final RedisProperties redisProperties;
+    private final RedisProperties redisProperties;
 
-  @Bean
-  public RedisConnectionFactory redisConnectionFactory() {
-    return new LettuceConnectionFactory();
-  }
+    @Bean
+    public RedisConnectionFactory redisConnectionFactory() {
+        return new LettuceConnectionFactory();
+    }
 
-  @Bean(destroyMethod = "shutdown")
-  ClientResources clientResources() {
-    return DefaultClientResources.create();
-  }
+    @Bean(destroyMethod = "shutdown")
+    ClientResources clientResources() {
+        return DefaultClientResources.create();
+    }
 
-  @Bean
-  public RedisStandaloneConfiguration redisStandaloneConfiguration() {
-    return new RedisStandaloneConfiguration(redisProperties.getHost(), redisProperties.getPort());
-  }
+    @Bean
+    public RedisStandaloneConfiguration redisStandaloneConfiguration() {
+        return new RedisStandaloneConfiguration(redisProperties.getHost(),
+              redisProperties.getPort());
+    }
 
-  @Bean
-  ClientOptions clientOptions() {
-    return ClientOptions.builder()
-        .disconnectedBehavior(ClientOptions.DisconnectedBehavior.REJECT_COMMANDS)
-        .autoReconnect(true)
-        .build();
-  }
+    @Bean
+    ClientOptions clientOptions() {
+        return ClientOptions.builder()
+              .disconnectedBehavior(ClientOptions.DisconnectedBehavior.REJECT_COMMANDS)
+              .autoReconnect(true)
+              .build();
+    }
 
-  @Bean
-  LettucePoolingClientConfiguration lettucePoolConfig(ClientOptions options,
-      ClientResources clientResources) {
-    return LettucePoolingClientConfiguration.builder()
-        .poolConfig(new GenericObjectPoolConfig())
-        .clientOptions(options)
-        .clientResources(clientResources)
-        .build();
-  }
+    @Bean
+    LettucePoolingClientConfiguration lettucePoolConfig(ClientOptions options,
+                                                        ClientResources clientResources) {
+        return LettucePoolingClientConfiguration.builder()
+              .poolConfig(new GenericObjectPoolConfig())
+              .clientOptions(options)
+              .clientResources(clientResources)
+              .build();
+    }
 
-  @Bean
-  RedisConnectionFactory connectionFactory(
-      RedisStandaloneConfiguration redisStandaloneConfiguration,
-      LettucePoolingClientConfiguration lettucePoolConfig) {
-    return new LettuceConnectionFactory(redisStandaloneConfiguration, lettucePoolConfig);
-  }
+    @Bean
+    RedisConnectionFactory connectionFactory(
+          RedisStandaloneConfiguration redisStandaloneConfiguration,
+          LettucePoolingClientConfiguration lettucePoolConfig) {
+        return new LettuceConnectionFactory(redisStandaloneConfiguration, lettucePoolConfig);
+    }
 
-  /**
-   * Provides a default {@link RedisTemplate}.
-   *
-   * @param redisConnectionFactory {@link #connectionFactory(RedisStandaloneConfiguration,
-   *                               LettucePoolingClientConfiguration) connectionFactory}
-   * @return the default template
-   */
-  @Bean
-  @Primary
-  @ConditionalOnMissingBean(name = "redisTemplate")
-  public RedisTemplate<Object, Object> redisTemplate(
-      RedisConnectionFactory redisConnectionFactory) {
-    RedisTemplate<Object, Object> template = new RedisTemplate<>();
-    template.setConnectionFactory(redisConnectionFactory);
-    return template;
-  }
+    /**
+     * Provides a default {@link RedisTemplate}.
+     *
+     * @param redisConnectionFactory {@link #connectionFactory(RedisStandaloneConfiguration,
+     *                               LettucePoolingClientConfiguration) connectionFactory}
+     * @return the default template
+     */
+    @Bean
+    @Primary
+    @ConditionalOnMissingBean(name = "redisTemplate")
+    public RedisTemplate<Object, Object> redisTemplate(
+          RedisConnectionFactory redisConnectionFactory) {
+        RedisTemplate<Object, Object> template = new RedisTemplate<>();
+        template.setConnectionFactory(redisConnectionFactory);
+        return template;
+    }
 }

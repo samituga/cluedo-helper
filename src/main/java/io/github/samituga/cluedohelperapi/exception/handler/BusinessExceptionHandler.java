@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class BusinessExceptionHandler extends BaseHandler {
 
-  public BusinessExceptionHandler(ErrorConfig errorConfig) {
-    super(errorConfig);
-  }
+    public BusinessExceptionHandler(ErrorConfig errorConfig) {
+        super(errorConfig);
+    }
 }

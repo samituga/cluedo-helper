@@ -13,8 +13,8 @@ import org.springframework.validation.annotation.Validated;
  * Contains additional info about an error.
  */
 @JsonPropertyOrder({
-    "title",
-    "description"
+      "title",
+      "description"
 })
 @Data
 @Builder
@@ -23,11 +23,11 @@ import org.springframework.validation.annotation.Validated;
 @JsonIgnoreProperties(ignoreUnknown = false)
 public class SubErrorResponse {
 
-  @NotBlank
-  @JsonProperty("title")
-  private String title;
+    @NotBlank
+    @JsonProperty("title")
+    private String title;
 
-  @NotBlank
-  @JsonProperty("description")
-  private String description;
+    @NotBlank
+    @JsonProperty("description")
+    private String description;
 }

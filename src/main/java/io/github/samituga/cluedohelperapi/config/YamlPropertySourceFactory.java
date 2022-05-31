@@ -14,15 +14,15 @@ import org.springframework.core.io.support.PropertySourceFactory;
  */
 public class YamlPropertySourceFactory implements PropertySourceFactory {
 
-  @Override
-  public PropertySource<?> createPropertySource(String name, EncodedResource encodedResource) {
-    YamlPropertiesFactoryBean factory = new YamlPropertiesFactoryBean();
-    factory.setResources(encodedResource.getResource());
+    @Override
+    public PropertySource<?> createPropertySource(String name, EncodedResource encodedResource) {
+        YamlPropertiesFactoryBean factory = new YamlPropertiesFactoryBean();
+        factory.setResources(encodedResource.getResource());
 
-    Properties properties = factory.getObject();
+        Properties properties = factory.getObject();
 
-    return new PropertiesPropertySource(
-        Objects.requireNonNull(encodedResource.getResource().getFilename()),
-        Objects.requireNonNull(properties));
-  }
+        return new PropertiesPropertySource(
+              Objects.requireNonNull(encodedResource.getResource().getFilename()),
+              Objects.requireNonNull(properties));
+    }
 }

@@ -15,28 +15,28 @@ import org.springframework.beans.factory.annotation.Qualifier;
 @Qualifier
 public @interface LoggerQualifier {
 
-  /**
-   * Name to be givven to the {@link org.apache.logging.log4j.Logger}.
-   *
-   * @return a {@link LoggerName LoggerName} value
-   */
-  LoggerName loggerName();
+    /**
+     * Name to be givven to the {@link org.apache.logging.log4j.Logger}.
+     *
+     * @return a {@link LoggerName LoggerName} value
+     */
+    LoggerName loggerName();
 
-  /**
-   * Enum to store the possible names for the logger.
-   */
-  enum LoggerName {
-    EXTERNAL_REQUEST("ExternalRequest");
+    /**
+     * Enum to store the possible names for the logger.
+     */
+    enum LoggerName {
+        EXTERNAL_REQUEST("ExternalRequest");
 
-    private final String toStringValue;
+        private final String toStringValue;
 
-    LoggerName(String toStringValue) {
-      this.toStringValue = toStringValue;
+        LoggerName(String toStringValue) {
+            this.toStringValue = toStringValue;
+        }
+
+        @Override
+        public String toString() {
+            return toStringValue;
+        }
     }
-
-    @Override
-    public String toString() {
-      return toStringValue;
-    }
-  }
 }

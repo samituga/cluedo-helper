@@ -25,30 +25,30 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CorrelationFilter extends OncePerRequestFilter {
 
-  private final Logger logger;
+    private final Logger logger;
 
-  public CorrelationFilter(@LoggerQualifier(loggerName = EXTERNAL_REQUEST) Logger logger) {
-    this.logger = logger;
-  }
-
-  @Override
-  protected void doFilterInternal(final HttpServletRequest request,
-      final HttpServletResponse response,
-      final FilterChain chain)
-      throws java.io.IOException, ServletException {
-    try {
-      final String correlationId;
-      if (!StringUtils.isEmpty(request.getHeader(ApiConstants.CORRELATION_ID_KEY))) {
-        correlationId = request.getHeader(ApiConstants.CORRELATION_ID_KEY);
-        logger.info("Using request correlation id: " + correlationId);
-      } else {
-        correlationId = UUID.randomUUID().toString().toUpperCase().replace("-", "");
-      }
-      ThreadContextWrapper.putCorrelationId(correlationId);
-      response.addHeader(ApiConstants.CORRELATION_ID_KEY, correlationId);
-      chain.doFilter(request, response);
-    } finally {
-      ThreadContextWrapper.removeCorrelationId();
+    public CorrelationFilter(@LoggerQualifier(loggerName = EXTERNAL_REQUEST) Logger logger) {
+        this.logger = logger;
     }
-  }
+
+    @Override
+    protected void doFilterInternal(final HttpServletRequest request,
+                                    final HttpServletResponse response,
+                                    final FilterChain chain)
+          throws java.io.IOException, ServletException {
+        try {
+            final String correlationId;
+            if (!StringUtils.isEmpty(request.getHeader(ApiConstants.CORRELATION_ID_KEY))) {
+                correlationId = request.getHeader(ApiConstants.CORRELATION_ID_KEY);
+                logger.info("Using request correlation id: " + correlationId);
+            } else {
+                correlationId = UUID.randomUUID().toString().toUpperCase().replace("-", "");
+            }
+            ThreadContextWrapper.putCorrelationId(correlationId);
+            response.addHeader(ApiConstants.CORRELATION_ID_KEY, correlationId);
+            chain.doFilter(request, response);
+        } finally {
+            ThreadContextWrapper.removeCorrelationId();
+        }
+    }
 }

@@ -19,34 +19,35 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class ApiExceptionHandler extends BaseHandler {
 
-  public ApiExceptionHandler(ErrorConfig errorConfig) {
-    super(errorConfig);
-  }
+    public ApiExceptionHandler(ErrorConfig errorConfig) {
+        super(errorConfig);
+    }
 
-  /**
-   * Handles {@link NoHandlerFoundException}.
-   *
-   * @param ex the exception to handle
-   * @return An {@link ResponseEntity} with the information about the error
-   */
-  @ExceptionHandler(NoHandlerFoundException.class)
-  public ResponseEntity<ErrorResponse> noHandlerFoundHandler(final NoHandlerFoundException ex) {
-    final ErrorDetail errorDetail = errorConfig.get(ErrorCodeConstants.CH_RESOURCE_NOT_FOUND);
-    final String message = errorDetail.getMessage().concat(": ").concat(ex.getRequestURL());
-    final ErrorResponse error = buildErrorResponse(errorDetail, message);
-    return ResponseEntity.status(errorDetail.getHttpCode()).body(error);
-  }
+    /**
+     * Handles {@link NoHandlerFoundException}.
+     *
+     * @param ex the exception to handle
+     * @return An {@link ResponseEntity} with the information about the error
+     */
+    @ExceptionHandler(NoHandlerFoundException.class)
+    public ResponseEntity<ErrorResponse> noHandlerFoundHandler(final NoHandlerFoundException ex) {
+        final ErrorDetail errorDetail = errorConfig.get(ErrorCodeConstants.CH_RESOURCE_NOT_FOUND);
+        final String message = errorDetail.getMessage().concat(": ").concat(ex.getRequestURL());
+        final ErrorResponse error = buildErrorResponse(errorDetail, message);
+        return ResponseEntity.status(errorDetail.getHttpCode()).body(error);
+    }
 
-  /**
-   * Handles {@link MissingServletRequestParameterException}.
-   *
-   * @return An {@link ResponseEntity} with the information about the error
-   */
-  @ExceptionHandler(MissingServletRequestParameterException.class)
-  public ResponseEntity<ErrorResponse> handleValidationExceptions(
-      final MissingServletRequestParameterException ex) {
-    final ErrorDetail errorDetail = errorConfig.get(ErrorCodeConstants.CH_REQUEST_PARAM_FAILURE);
-    final ErrorResponse error = buildErrorResponse(errorDetail, ex.getLocalizedMessage());
-    return ResponseEntity.status(errorDetail.getHttpCode()).body(error);
-  }
+    /**
+     * Handles {@link MissingServletRequestParameterException}.
+     *
+     * @return An {@link ResponseEntity} with the information about the error
+     */
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public ResponseEntity<ErrorResponse> handleValidationExceptions(
+          final MissingServletRequestParameterException ex) {
+        final ErrorDetail errorDetail = errorConfig.get(
+              ErrorCodeConstants.CH_REQUEST_PARAM_FAILURE);
+        final ErrorResponse error = buildErrorResponse(errorDetail, ex.getLocalizedMessage());
+        return ResponseEntity.status(errorDetail.getHttpCode()).body(error);
+    }
 }

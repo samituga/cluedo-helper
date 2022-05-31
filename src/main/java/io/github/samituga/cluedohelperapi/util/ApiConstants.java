@@ -8,5 +8,5 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class ApiConstants {
 
-  public static final String CORRELATION_ID_KEY = "X-Correlation-ID";
+    public static final String CORRELATION_ID_KEY = "X-Correlation-ID";
 }
